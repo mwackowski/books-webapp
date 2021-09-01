@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="card card-body">
+    <h1>Api documentation</h1>
+    <ul>
+    <li>API base endpoint listing all records: <b>/api/books/</b></li>
+    <li>Default number of records per page is 5 and it can be increased up to 20 using <b>page_size</b> parameter</li>
+    <p>Example: <b>/api/books/?page_size=20</b> </p>
+    <li>There's also possibility to apply equality-based filtering using following keywords: <b>title, author, language, published_date</b> :
+            <p>Example: <b>/api/books/?title=Hobbit&page_size=2</b></p>
+    <li>API support also field lookups: <a href="https://docs.djangoproject.com/en/2.0/ref/models/querysets/#field-lookups">django docs</a></li>
+    <p>Example: <b>/api/books/?title__icontains=Hobbit&published_date__lt=2018</b></p>
+    </ul>
+</div>
+
+{% endblock %}

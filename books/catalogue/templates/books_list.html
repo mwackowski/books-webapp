@@ -1,0 +1,122 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+
+<br>
+<div class="row">
+	<div class="col">
+		<div class="card card-body">
+
+                <form method="GET" action=".">
+                    <div class="form-group">
+                    <div class="row">
+
+                      <div class=" col-md-2">
+                        <label>Title</label>
+                        {{ filter.form.title }}
+                      </div>
+                      <div class=" col-md-2">
+                        <label>Author</label>
+                        {{ filter.form.author }}
+                      </div>
+                      <div class=" col-md-2">
+                        <label>Language</label>
+                        {{ filter.form.language }}
+                      </div>
+                      <div class=" col-md-2">
+                        <label>Publish date minimum</label>
+                        {{ filter.form.start_date}}
+                      </div>
+                      <div class=" col-md-2">
+                        <label for="publish_max">Publish date maximum</label>
+                        {{ filter.form.end_date}}
+                      </div>
+                    </div>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Search</button>
+                  </form>
+
+ 
+		</div>
+	</div>
+	
+</div>
+<br>
+<div class="row">
+	<div class="col-md">
+        
+		<div class="card card-body">
+
+    <a class="col-1 btn btn-sm btn-primary btn-block" href="{% url 'book-create' %}">Add new entry</a>    
+    <br>
+            
+			<table class="table table-sm">
+				<tr>
+                    <th>Title</th>
+                    <th>Author</th>
+                    <th>Pages</th>
+                    <th>Language</th>
+                    <th>Published date</th>
+                    <th>ISBN 10</th>
+                    <th>ISBN 13</th>
+
+                    <th>Front page</th>
+				</tr>
+                {% for book in filter.qs %}
+                <tr>
+                    <td>{{book.title}}</td>
+
+                    {% if book.author == '' or book.author is NONE %}
+                    <td>-</td>
+                    {% else %}
+                    <td>{{book.author}}</td>
+                    {% endif %}
+
+                    {% if book.pages == '' or book.pages is NONE %}
+                    <td>-</td>
+                    {% else %}
+                    <td>{{book.pages}}</td>
+                    {% endif %}
+
+                    <td>{{book.language}}</td>
+
+                    {% if book.published_date == '' or book.published_date is NONE %}
+                    <td>-</td>
+                    {% else %}
+                    <td>{{book.published_date}}</td>
+                    {% endif %}                    
+
+                    {% if book.isbn10 == '' or book.isbn10 is NONE %}
+                    <td>-</td>
+                    {% else %}
+                    <td>{{book.isbn10}}</td>
+                    {% endif %}
+
+                    {% if book.isbn13 == '' or book.isbn13 is NONE %}
+                    <td>-</td>
+                    {% else %}
+                    <td>{{book.isbn13}}</td>
+                    {% endif %}
+
+                    {% if book.front_page == '' or book.front_page is NONE %}
+                    <td>-</td>
+                    {% else %}
+                    <td><a href = "{{book.front_page}}">Link</a></td>
+                    {% endif %}
+                    
+                    <td><a class='btn btn-sm  btn-primary' href="{% url 'book-update' book.id %}" >Update</a></td>
+                    <td><a class='btn btn-sm btn-danger ' href="{% url 'book-delete' book.id %}" >Remove</a></td>
+
+                </tr>
+
+            {% endfor %}
+			</table>
+		</div>
+	</div>
+</div>
+<table>
+    
+
+</table>
+{% endblock %}

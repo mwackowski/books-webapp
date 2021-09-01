@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<br>
+<div class="row">
+	<div class="col-md">
+        
+		<div class="card card-body">
+            <form action='.'  method='POST'>  {% csrf_token %}
+                {{form.as_p}}
+                <input type = "submit" value = "Save">
+            </form>
+		</div>
+	</div>
+</div>
+{% endblock %}

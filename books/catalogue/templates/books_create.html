@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+{% block content %}
+
+
+<br>
+<div class="row">
+	<div class="col-md">
+        
+		<div class="card card-body">
+
+            <div class="form-group">
+
+            <form action='' method="POST" class='form-control'>   {% csrf_token %}
+                {% for non_field_error in form.non_field_errors %}
+                    <b><p style="color:rgba(220, 46, 46, 0.952)" >{{ non_field_error }}</p></b>
+                {% endfor %}
+                {% for field in form %}
+                    <div class="form-group col-sm-6 col-md-4">
+                        {{ field|as_crispy_field }}
+                        {% for error in field.errors %}
+                            <p class="help is-danger">{{ error }}</p>
+                        {% endfor %}
+                    </div>
+
+                {% endfor %}
+                <input type='submit' value='Save'>
+            </form>            
+
+
+            </div>
+
+   
+        </div>
+            
+        
+	</div>
+</div>
+<table>
+    
+
+</table>
+{% endblock %}
